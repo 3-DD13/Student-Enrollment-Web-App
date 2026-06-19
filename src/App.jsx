@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { handleSignIn, handleSignOut, handleEnroll, handleDrop } from './Handlers';
 
 function App() {
+
   const [isloggedIn, setIsLoggedIn] = useState(false);
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-
+  const [loginError, setLoginError] = useState("");
   const [page, setPage] = useState("Courses");
   const [myCourses, setMyCourses] = useState([
     {
@@ -48,11 +50,11 @@ function App() {
       <>
         <h1>ACME University</h1>
         <h2>Welcome {username}</h2>
-        <button onClick={() => setPage("Courses")}> Courses</button>
+        <button onClick={() => setPage("Courses")}> My Courses</button>
         <button onClick={() => setPage("addCourses")}> Add Courses</button>
 
 
-        <button onClick={() => setIsLoggedIn(false)}> Sign out</button>
+        <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
 
         <h2>{page === "Courses" ? "Your Courses" : "All Courses"}</h2>
 
@@ -63,17 +65,31 @@ function App() {
               <th>Teacher</th>
               <th>time</th>
               <th>Student enrolled</th>
+              {page === "addCourses" && <th>Action</th>}
             </tr>
           </thead>
           <tbody>
-            {(page === "Courses" ? myCourses : allCourses).map((course) => (
+            {(page === "Courses" ? myCourses : allCourses).map((course) => {
+              const enrolled = myCourses.some((c) => c.name === course.name);
+              const full = course.enrolled >= course.capacity;
+              return (
               <tr key={course.name}>
                 <td>{course.name}</td>
                 <td>{course.teacher}</td>
                 <td>{course.time}</td>
                 <td>{course.enrolled}/{course.capacity}</td>
+                {page === "addCourses" && (
+                  <td>
+                    {enrolled ? (
+                      <button onClick={() => handleDrop(course.name, allCourses, setAllCourses, myCourses, setMyCourses)}>Drop</button>
+                    ) : (
+                      <button onClick ={() => handleEnroll(course.name, allCourses, setAllCourses, myCourses, setMyCourses)} disabled = {full} > {full ? "Full" : "Enroll"}</button>
+                    )}
+                  </td>
+                )}
               </tr>
-            ))}
+            );
+          })}
           </tbody>
         </table>
       </>
@@ -94,7 +110,7 @@ function App() {
         </label>
       </form>
 
-      <form className="passwordbox">
+      <form className="passwordBox">
         <label>
           Password:
           <input

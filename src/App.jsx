@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(false);
+  const [isloggedIn, setIsLoggedIn] = useState(false);
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
@@ -9,7 +9,7 @@ function App() {
   const [myCourses, setMyCourses] = useState([
     {
       name: "physics009",
-      Teacher: "John",
+      teacher: "John",
       time: "MON 11:00-12:15 AM",
       enrolled: 6,
       capacity: 10
@@ -17,7 +17,7 @@ function App() {
     },
     {
       name: "CSE 106",
-      Teacher: "Ammon Hepworth",
+      teacher: "Ammon Hepworth",
       time: "WF 10:00-12:20 AM",
       enrolled: 8,
       capacity: 10
@@ -28,14 +28,14 @@ function App() {
   const [allCourses, setAllCourses] = useState([
     {
       name: "Math 141",
-      Teacher: "Heinrich Müller",
+      teacher: "Heinrich Müller",
       time: "TTh 1:00-2:15 PM",
       enrolled: 10,
       capacity: 10
     },
     {
       name: "CSE 900",
-      Teacher: "Ammon Hepworth",
+      teacher: "Ammon Hepworth",
       time: "MWF 3:00-4:00 PM",
       enrolled: 8,
       capacity: 10
@@ -43,7 +43,7 @@ function App() {
   ]);
 
 
-  if (count) {
+  if (isloggedIn) {
     return (
       <>
         <h1>ACME University</h1>
@@ -52,16 +52,16 @@ function App() {
         <button onClick={() => setPage("addCourses")}> Add Courses</button>
 
 
-        <button onClick={() => setCount(false)}> Sign out</button>
+        <button onClick={() => setIsLoggedIn(false)}> Sign out</button>
 
         <h2>{page === "Courses" ? "Your Courses" : "All Courses"}</h2>
 
         <table>
           <thead>
             <tr>
-              <th> Course name</th>
-              <th> Teacher</th>
-              <th> time</th>
+              <th>Course name</th>
+              <th>Teacher</th>
+              <th>time</th>
               <th>Student enrolled</th>
             </tr>
           </thead>
@@ -107,7 +107,7 @@ function App() {
       </form>
 
 
-      <button type="button" className="signIn" onClick={() => setCount(true)}>
+      <button type="button" className="signIn" onClick={() => setIsLoggedIn(true)}>
         Sign in
       </button>
     </>

@@ -17,3 +17,27 @@ body {
 .passwordBox {
   margin-top: 10px;
 }
+
+table, th, tr, td {
+  border-style: solid;
+  border-collapse: collapse;
+  border-color: rgb(234, 234, 234);
+  background-color: rgb(137, 216, 255);
+}
+
+th {
+  background-color: rgb(22, 115, 255);
+}
+
+header {
+  border-style: solid;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+}
+header h3 {
+  justify-self: start;
+}
+header button {
+  justify-self: end;
+}

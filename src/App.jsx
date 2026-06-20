@@ -10,9 +10,9 @@ function App() {
   const [page, setPage] = useState("Courses");
   const [myCourses, setMyCourses] = useState([
     {
-      name: "physics009",
+      name: "PHYS 009",
       teacher: "John",
-      time: "MON 11:00-12:15 AM",
+      time: "M 11:00-12:15 AM",
       enrolled: 6,
       capacity: 10
 
@@ -44,17 +44,60 @@ function App() {
     }
   ]);
 
+  function AdminDashboard({ onSignOut }){
+    return(
+      <>
+      <header>
+        {/* change later */}
+        <h3>Welcome Dr Hepworth</h3> 
+        <h1>ACME University</h1>
+        <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
+      </header>
+      
+      <h2>Your Courses</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Course Name</th>
+          <th>Teacher</th>
+          <th>Time</th>
+          <th>Students Enrolled</th>
+        </tr>  
+        </thead>
+        <tbody>
+          {allCourses.filter((course) => course.teacher === "Ammon Hepworth").map((course) => (
+          <tr key={course.name}>
+            <td>{course.name}</td>
+            <td>{course.teacher}</td>
+            <td>{course.time}</td>
+            <td>{course.enrolled}/{course.capacity}</td>
+          </tr>
+        ))}
+        </tbody>
+      </table>
+      </>
+    );
+  }
 
   if (isloggedIn) {
+    //will change later to be role based
+    if(username == "ahepworth"){
+      return<AdminDashboard onSignOut={() => handleSignOut()}/>;
+    }
+
     return (
       <>
+        <header>
+        <h3>Welcome {username}</h3>
         <h1>ACME University</h1>
-        <h2>Welcome {username}</h2>
+        <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
+        </header>
+        
         <button onClick={() => setPage("Courses")}> My Courses</button>
         <button onClick={() => setPage("addCourses")}> Add Courses</button>
 
 
-        <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
+        
 
         <h2>{page === "Courses" ? "Your Courses" : "All Courses"}</h2>
 
@@ -63,7 +106,7 @@ function App() {
             <tr>
               <th>Course name</th>
               <th>Teacher</th>
-              <th>time</th>
+              <th>Time</th>
               <th>Student enrolled</th>
               {page === "addCourses" && <th>Action</th>}
             </tr>
@@ -98,7 +141,7 @@ function App() {
 
   return (
     <>
-      <h1>ACME university</h1>
+      <h1>ACME University</h1>
       <form className="usernameBox">
         <label>
           Username:

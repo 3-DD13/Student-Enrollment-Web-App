@@ -166,7 +166,17 @@ function App() {
       </form>
 
 
-      <button type="button" className="signIn" onClick={() => setIsLoggedIn(true)}>
+   {loginError && <p>{loginError}</p>}
+
+      <button type="button" 
+      className="signIn" 
+      onClick={(e) => {const success = handleSignIn(e, username, password, setIsLoggedIn);
+        if (!success) {
+          setLoginError("Please enter a username and password");
+        } else {
+          setLoginError("");
+        }
+      }}>
         Sign in
       </button>
     </>

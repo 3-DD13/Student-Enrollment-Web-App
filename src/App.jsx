@@ -44,6 +44,53 @@ function App() {
   ]);
 
   function AdminDashboard({ onSignOut }){
+    
+    if (selectedCourse) {
+  return (
+    <>
+      <h1>{selectedCourse}</h1>
+
+      <button onClick={() => setSelectedCourse(null)}>
+        Back
+      </button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>joe schmo </td>
+            <td>
+              <input type="number" defaultValue="92" />
+            </td>
+          </tr>
+
+          <tr>
+            <td>leila langley</td>
+            <td>
+              <input type="number" defaultValue="78" />
+            </td>
+          </tr>
+
+          <tr>
+            <td>Iko Uwais</td>
+            <td>
+              <input type="number" defaultValue="95" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </>
+  );
+}
+    
+    
+    
     return(
       <>
       <header>
@@ -61,6 +108,7 @@ function App() {
           <th>Teacher</th>
           <th>Time</th>
           <th>Students Enrolled</th>
+          <th>Action</th>
         </tr>  
         </thead>
         <tbody>
@@ -70,6 +118,12 @@ function App() {
             <td>{course.teacher}</td>
             <td>{course.time}</td>
             <td>{course.enrolled}/{course.capacity}</td>
+
+            <td>
+              <button onClick={() => setSelectedCourse(course.name)}>
+                view</button>
+            </td>
+
           </tr>
         ))}
         </tbody>
@@ -80,7 +134,7 @@ function App() {
 
   if (isloggedIn) {
     //will change later to be role based
-    if(username == "ahepworth"){
+    if(username === "ahepworth"){
       return<AdminDashboard onSignOut={() => handleSignOut()}/>;
     }
 

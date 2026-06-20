@@ -3,6 +3,7 @@ import { handleSignIn, handleSignOut, handleEnroll, handleDrop } from './Handler
 
 function App() {
 
+  const [selectedCourse, setSelectedCourse] = useState(null);
   const [isloggedIn, setIsLoggedIn] = useState(false);
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -42,45 +43,45 @@ function App() {
     }
   ]);
 
-  function AdminDashboard({ onSignOut }) {
-    return (
+  function AdminDashboard({ onSignOut }){
+    return(
       <>
-        <header>
-          {/* change later */}
-          <h3>Welcome Dr. Hepworth</h3>
-          <h1>ACME University</h1>
-          <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
-        </header>
-
-        <h2>Your Courses</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Course Name</th>
-              <th>Teacher</th>
-              <th>Time</th>
-              <th>Students Enrolled</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allCourses.filter((course) => course.teacher === "Ammon Hepworth").map((course) => (
-              <tr key={course.name}>
-                <td>{course.name}</td>
-                <td>{course.teacher}</td>
-                <td>{course.time}</td>
-                <td>{course.enrolled}/{course.capacity}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <header>
+        {/* change later */}
+        <h3>Welcome Dr Hepworth</h3> 
+        <h1>ACME University</h1>
+        <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
+      </header>
+      
+      <h2>Your Courses</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Course Name</th>
+          <th>Teacher</th>
+          <th>Time</th>
+          <th>Students Enrolled</th>
+        </tr>  
+        </thead>
+        <tbody>
+          {allCourses.filter((course) => course.teacher === "Ammon Hepworth").map((course) => (
+          <tr key={course.name}>
+            <td>{course.name}</td>
+            <td>{course.teacher}</td>
+            <td>{course.time}</td>
+            <td>{course.enrolled}/{course.capacity}</td>
+          </tr>
+        ))}
+        </tbody>
+      </table>
       </>
     );
   }
 
   if (isloggedIn) {
     //will change later to be role based
-    if (username == "ahepworth") {
-      return <AdminDashboard onSignOut={() => handleSignOut()} />;
+    if(username == "ahepworth"){
+      return<AdminDashboard onSignOut={() => handleSignOut()}/>;
     }
 
     return (

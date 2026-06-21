@@ -51,6 +51,49 @@ function App() {
     }
   ]);
 
+
+function getUserRole(username) {
+  if (username === "ahepworth") {
+    return "teacher";
+  }
+
+  if (username === "admin") {
+    return "admin";
+  }
+
+  return "student";
+}
+
+
+function RealAdminDashboard() {
+  return (
+    <>
+      <header>
+        <h3>Welcome Admin</h3>
+        <h1>ACME University</h1>
+
+        <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}>
+          Sign out
+        </button>
+      </header>
+
+      <h2>Admin Dashboard</h2>
+
+      <p>Admin can create, read, update, and delete all database data.</p>
+
+      <ul>
+        <li>Manage users</li>
+        <li>Manage courses</li>
+        <li>Manage enrollments</li>
+        <li>Manage grades</li>
+      </ul>
+    </>
+  );
+}
+
+
+
+
   function AdminDashboard({ onSignOut }) {
 
     if (selectedCourse) {
@@ -149,11 +192,16 @@ function App() {
   }
 
   if (isloggedIn) {
-    //will change later to be role based
-    if (username === "ahepworth") {
+
+    const role = getUserRole(username);
+
+    if (role === "teacher") {
       return <AdminDashboard onSignOut={() => handleSignOut()} />;
     }
 
+   if (role === "admin") {
+  return <RealAdminDashboard />;
+}
     return (
       <>
         <header>

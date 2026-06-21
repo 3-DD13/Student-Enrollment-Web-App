@@ -9,6 +9,14 @@ function App() {
   const [username, setUsername] = useState("");
   const [loginError, setLoginError] = useState("");
   const [page, setPage] = useState("Courses");
+  const [courseStudents, setCourseStudents] = useState([
+    {course: "CSE 900", name: "joe schmo", grade: 92},
+    {course: "CSE 900", name: "leila langley", grade: 78},
+    {course: "CSE 900", name: "Iko Uwais", grade: 95},
+   {course: "CSE 106", name: "john jones", grade: 12},
+    {course: "CSE 106", name: "sarah smith", grade: 91}
+
+  ]);
   const [myCourses, setMyCourses] = useState([
     {
       name: "PHYS 009",
@@ -62,29 +70,37 @@ function App() {
           </tr>
         </thead>
 
-        <tbody>
-          <tr>
-            <td>joe schmo </td>
-            <td>
-              <input type="number" defaultValue="92" />
-            </td>
-          </tr>
+       <tbody>
+    {courseStudents
+      .filter((student) => student.course === selectedCourse)
+     .map((student) => (
+        <tr key={student.name}>
+        <td>{student.name}</td>
 
-          <tr>
-            <td>leila langley</td>
-            <td>
-              <input type="number" defaultValue="78" />
-            </td>
-          </tr>
+        <td>
+          <input
+            type="number"
+            value={student.grade}
+            onChange={(e) => {
+              const updatedStudents = courseStudents.map((s) =>
+                s.name === student.name &&
+                s.course === selectedCourse
+                  ? { ...s, grade: e.target.value }
+                  : s
+              );
 
-          <tr>
-            <td>Iko Uwais</td>
-            <td>
-              <input type="number" defaultValue="95" />
-            </td>
-          </tr>
-        </tbody>
+              setCourseStudents(updatedStudents);
+            }}
+          />
+        </td>
+      </tr>
+    ))}
+      </tbody>
       </table>
+      <button
+    onClick={() => alert("Grades saved successfully")}>
+        Save Grades
+      </button>
     </>
   );
 }

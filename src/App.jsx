@@ -10,11 +10,11 @@ function App() {
   const [loginError, setLoginError] = useState("");
   const [page, setPage] = useState("Courses");
   const [courseStudents, setCourseStudents] = useState([
-    {course: "CSE 900", name: "joe schmo", grade: 92},
-    {course: "CSE 900", name: "leila langley", grade: 78},
-    {course: "CSE 900", name: "Iko Uwais", grade: 95},
-   {course: "CSE 106", name: "john jones", grade: 12},
-    {course: "CSE 106", name: "sarah smith", grade: 91}
+    { course: "CSE 106", name: "Joe Schmo", grade: 92 },
+    { course: "CSE 106", name: "Leila Langley", grade: 78 },
+    { course: "CSE 106", name: "Iko Uwais", grade: 95 },
+    { course: "CSE 106", name: "John Jones", grade: 12 },
+    { course: "CSE 106", name: "Sarah Smith", grade: 91 }
 
   ]);
   const [myCourses, setMyCourses] = useState([
@@ -51,107 +51,107 @@ function App() {
     }
   ]);
 
-  function AdminDashboard({ onSignOut }){
-    
+  function AdminDashboard({ onSignOut }) {
+
     if (selectedCourse) {
-  return (
-    <>
-      <h1>{selectedCourse}</h1>
+      return (
+        <>
+          <h1>{selectedCourse}</h1>
 
-      <button onClick={() => setSelectedCourse(null)}>
-        Back
-      </button>
+          <button onClick={() => setSelectedCourse(null)}>
+            Back
+          </button>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Student Name</th>
-            <th>Grade</th>
-          </tr>
-        </thead>
+          <table>
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
 
-       <tbody>
-    {courseStudents
-      .filter((student) => student.course === selectedCourse)
-     .map((student) => (
-        <tr key={student.name}>
-        <td>{student.name}</td>
+            <tbody>
+              {courseStudents
+                .filter((student) => student.course === selectedCourse)
+                .map((student) => (
+                  <tr key={student.name}>
+                    <td>{student.name}</td>
 
-        <td>
-          <input
-            type="number"
-            value={student.grade}
-            onChange={(e) => {
-              const updatedStudents = courseStudents.map((s) =>
-                s.name === student.name &&
-                s.course === selectedCourse
-                  ? { ...s, grade: e.target.value }
-                  : s
-              );
+                    <td>
+                      <input
+                        type="number"
+                        value={student.grade}
+                        onChange={(e) => {
+                          const updatedStudents = courseStudents.map((s) =>
+                            s.name === student.name &&
+                              s.course === selectedCourse
+                              ? { ...s, grade: e.target.value }
+                              : s
+                          );
 
-              setCourseStudents(updatedStudents);
-            }}
-          />
-        </td>
-      </tr>
-    ))}
-      </tbody>
-      </table>
-      <button
-    onClick={() => alert("Grades saved successfully")}>
-        Save Grades
-      </button>
-    </>
-  );
-}
-    
-    
-    
-    return(
+                          setCourseStudents(updatedStudents);
+                        }}
+                      />
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+          <button
+            onClick={() => alert("Grades saved successfully")}>
+            Save Grades
+          </button>
+        </>
+      );
+    }
+
+
+
+    return (
       <>
-      <header>
-        {/* change later */}
-        <h3>Welcome Dr Hepworth</h3> 
-        <h1>ACME University</h1>
-        <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
-      </header>
-      
-      <h2>Your Courses</h2>
-      <table>
-        <thead>
-        <tr>
-          <th>Course Name</th>
-          <th>Teacher</th>
-          <th>Time</th>
-          <th>Students Enrolled</th>
-          <th>Action</th>
-        </tr>  
-        </thead>
-        <tbody>
-          {allCourses.filter((course) => course.teacher === "Ammon Hepworth").map((course) => (
-          <tr key={course.name}>
-            <td>{course.name}</td>
-            <td>{course.teacher}</td>
-            <td>{course.time}</td>
-            <td>{course.enrolled}/{course.capacity}</td>
+        <header>
+          {/* change later */}
+          <h3>Welcome Dr Hepworth</h3>
+          <h1>ACME University</h1>
+          <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
+        </header>
 
-            <td>
-              <button onClick={() => setSelectedCourse(course.name)}>
-                view</button>
-            </td>
+        <h2>Your Courses</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Course Name</th>
+              <th>Teacher</th>
+              <th>Time</th>
+              <th>Students Enrolled</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allCourses.filter((course) => course.teacher === "Ammon Hepworth").map((course) => (
+              <tr key={course.name}>
+                <td>{course.name}</td>
+                <td>{course.teacher}</td>
+                <td>{course.time}</td>
+                <td>{course.enrolled}/{course.capacity}</td>
 
-          </tr>
-        ))}
-        </tbody>
-      </table>
+                <td>
+                  <button onClick={() => setSelectedCourse(course.name)}>
+                    view</button>
+                </td>
+
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </>
     );
   }
 
   if (isloggedIn) {
     //will change later to be role based
-    if(username === "ahepworth"){
-      return<AdminDashboard onSignOut={() => handleSignOut()}/>;
+    if (username === "ahepworth") {
+      return <AdminDashboard onSignOut={() => handleSignOut()} />;
     }
 
     return (

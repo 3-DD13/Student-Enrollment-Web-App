@@ -1,15 +1,15 @@
-export function handleSignIn(e, username, password, setCount) {
+export function handleSignIn(e, username, password, setIsLoggedIn) {
     e.preventDefault();
 
     if (username.trim() === "" || password.trim() === "") {
         return false;
     }
-    setCount(true);
+    setIsLoggedIn(true);
     return true;
 }
 
-export function handleSignOut(setCount, setUsername, setPassword, setPage) {
-    setCount(false);
+export function handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage) {
+    setIsLoggedIn(false);
     setUsername("");
     setPassword("");
     setPage("Courses");
@@ -45,7 +45,7 @@ export function handleEnroll(courseName, allCourses, setAllCourses, myCourses, s
         name: course.name,
         teacher: course.teacher,
         time: course.time,
-        enrolled: course.enrolled,
+        enrolled: course.enrolled + 1,
         capacity: course.capacity
     });
     setMyCourses(newMyCourses);

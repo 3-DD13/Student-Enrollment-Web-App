@@ -92,7 +92,7 @@ function App() {
 
 
 
-  function AdminDashboard({ onSignOut }) {
+  function AdminDashboard(/* { onSignOut }*/) {
 
     if (selectedCourse) {
       return (
@@ -205,7 +205,7 @@ function App() {
     const role = getUserRole(username);
 
     if (role === "teacher") {
-      return <AdminDashboard onSignOut={() => handleSignOut()} />;
+      return <AdminDashboard /* onSignOut={() => handleSignOut()} */ />;
     }
 
     if (role === "admin") {

@@ -52,44 +52,42 @@ function App() {
   ]);
 
 
-function getUserRole(username) {
-  if (username === "ahepworth") {
-    return "teacher";
+  function getUserRole(username) {
+    if (username === "ahepworth") {
+      return "teacher";
+    }
+
+    if (username === "admin") {
+      return "admin";
+    }
+
+    return "student";
   }
 
-  if (username === "admin") {
-    return "admin";
+
+  function RealAdminDashboard() {
+    return (
+      <>
+        <header>
+          <h3>Welcome Admin</h3>
+          <h1>ACME University</h1>
+
+          <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}>
+            Sign out
+          </button>
+        </header>
+
+        <h2>Admin Dashboard</h2>
+
+        <p>Admin can create, read, update, and delete all database data.</p>
+
+        <button id="adminButton" /*onClick={() => setPage("manageUsers")}*/> Manage users</button>
+        <button id="adminButton" /*onClick={() => setPage("manageCourses")}*/>Manage courses</button>
+        <button id="adminButton" /*onClick={() => setPage("manageEnrollments")}*/>Manage courses</button>
+        <button id="adminButton" /*onClick={() => setPage("manageGrades")}*/>Manage courses</button>
+      </>
+    );
   }
-
-  return "student";
-}
-
-
-function RealAdminDashboard() {
-  return (
-    <>
-      <header>
-        <h3>Welcome Admin</h3>
-        <h1>ACME University</h1>
-
-        <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}>
-          Sign out
-        </button>
-      </header>
-
-      <h2>Admin Dashboard</h2>
-
-      <p>Admin can create, read, update, and delete all database data.</p>
-
-      <ul>
-        <li>Manage users</li>
-        <li>Manage courses</li>
-        <li>Manage enrollments</li>
-        <li>Manage grades</li>
-      </ul>
-    </>
-  );
-}
 
 
 
@@ -199,9 +197,9 @@ function RealAdminDashboard() {
       return <AdminDashboard onSignOut={() => handleSignOut()} />;
     }
 
-   if (role === "admin") {
-  return <RealAdminDashboard />;
-}
+    if (role === "admin") {
+      return <RealAdminDashboard />;
+    }
     return (
       <>
         <header>
@@ -210,8 +208,8 @@ function RealAdminDashboard() {
           <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
         </header>
 
-        <button onClick={() => setPage("Courses")}> My Courses</button>
-        <button onClick={() => setPage("addCourses")}> Add Courses</button>
+        <button id="studentButton" onClick={() => setPage("Courses")}> My Courses</button>
+        <button id="studentButton" onClick={() => setPage("addCourses")}> Add Courses</button>
 
         <h2>{page === "Courses" ? "Your Courses" : "All Courses"}</h2>
 

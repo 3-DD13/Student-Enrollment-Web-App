@@ -18,7 +18,10 @@ body {
   margin-top: 10px;
 }
 
-table, th, tr, td {
+table,
+th,
+tr,
+td {
   border-style: solid;
   border-collapse: collapse;
   border-color: rgb(234, 234, 234);
@@ -35,9 +38,16 @@ header {
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
 }
+
 header h3 {
   justify-self: start;
 }
+
 header button {
   justify-self: end;
+}
+
+#adminButton,
+#studentButton {
+  margin: 10px;
 }

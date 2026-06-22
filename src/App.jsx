@@ -97,6 +97,14 @@ function App() {
     if (selectedCourse) {
       return (
         <>
+          <header>
+          {/* change later */}
+          <h3>Welcome Dr Hepworth</h3>
+          <h1>ACME University</h1>
+          <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
+        </header>
+
+          <div className='interfaceBody'>
           <h1>{selectedCourse}</h1>
 
           <button onClick={() => setSelectedCourse(null)}>
@@ -142,6 +150,7 @@ function App() {
             onClick={() => alert("Grades saved successfully")}>
             Save Grades
           </button>
+          </div>
         </>
       );
     }
@@ -157,6 +166,7 @@ function App() {
           <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
         </header>
 
+        <div className='interfaceBody'>
         <h2>Your Courses</h2>
         <table>
           <thead>
@@ -185,6 +195,7 @@ function App() {
             ))}
           </tbody>
         </table>
+        </div>
       </>
     );
   }
@@ -208,9 +219,12 @@ function App() {
           <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
         </header>
 
+        <div className='tabs'>
         <button id="studentButton" onClick={() => setPage("Courses")}> My Courses</button>
         <button id="studentButton" onClick={() => setPage("addCourses")}> Add Courses</button>
+        </div>
 
+        <div className='interfaceBody'>
         <h2>{page === "Courses" ? "Your Courses" : "All Courses"}</h2>
 
         <table>
@@ -247,6 +261,7 @@ function App() {
             })}
           </tbody>
         </table>
+        </div>
       </>
     );
   }

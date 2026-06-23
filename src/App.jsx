@@ -258,7 +258,7 @@ function App() {
                         {enrolled ? (
                           <button onClick={async () => await handleDrop(course.name, allCourses, setAllCourses, myCourses, setMyCourses)}>Drop</button>
                         ) : (
-                          <button onClick={async () => await handleEnroll(course.name, allCourses, setAllCourses, myCourses, setMyCourses)} disabled={full} > {full ? "Full" : "Enroll"}</button>
+                          <button onClick={async () => await handleEnroll(course.name, setAllCourses, setMyCourses)} disabled={full} > {full ? "Full" : "Enroll"}</button>
                         )}
                       </td>
                     )}

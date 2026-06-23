@@ -26,7 +26,7 @@ export async function handleEnroll(courseId, setAllCourses, setMyCourses) {
         const updateAll = await fetch(`http://127.0.0.1:8000/courses/all`).then(r => r.json());
         setAllCourses(updateAll);
 
-        const updatedMy = await fetch(`http://127.0.0.1:8000/student/my-classes/1`)
+        const updatedMy = await fetch(`http://127.0.0.1:8000/student/my-classes/1`).then(r => r.json());
         setMyCourses(updatedMy)
     }
 }

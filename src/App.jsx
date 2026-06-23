@@ -72,7 +72,7 @@ function App() {
           <h3>Welcome Admin</h3>
           <h1>ACME University</h1>
 
-          <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}>
+          <button onClick={async () => await handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}>
             Sign out
           </button>
         </header>
@@ -101,7 +101,7 @@ function App() {
           {/* change later */}
           <h3>Welcome Dr Hepworth</h3>
           <h1>ACME University</h1>
-          <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
+          <button onClick={async () => await handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
         </header>
 
           <div className='interfaceBody'>
@@ -163,7 +163,7 @@ function App() {
           {/* change later */}
           <h3>Welcome Dr Hepworth</h3>
           <h1>ACME University</h1>
-          <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
+          <button onClick={async () => await handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
         </header>
 
         <div className='interfaceBody'>
@@ -216,7 +216,7 @@ function App() {
         <header>
           <h3>Welcome {username}</h3>
           <h1>ACME University</h1>
-          <button onClick={() => handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
+          <button onClick={async () => await handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
         </header>
 
         <div className='tabs'>
@@ -250,9 +250,9 @@ function App() {
                   {page === "addCourses" && (
                     <td>
                       {enrolled ? (
-                        <button onClick={() => handleDrop(course.name, allCourses, setAllCourses, myCourses, setMyCourses)}>Drop</button>
+                        <button onClick={async () => await handleDrop(course.name, allCourses, setAllCourses, myCourses, setMyCourses)}>Drop</button>
                       ) : (
-                        <button onClick={() => handleEnroll(course.name, allCourses, setAllCourses, myCourses, setMyCourses)} disabled={full} > {full ? "Full" : "Enroll"}</button>
+                        <button onClick={async () => await handleEnroll(course.name, allCourses, setAllCourses, myCourses, setMyCourses)} disabled={full} > {full ? "Full" : "Enroll"}</button>
                       )}
                     </td>
                   )}
@@ -296,8 +296,8 @@ function App() {
 
       <button type="button"
         className="signIn"
-        onClick={(e) => {
-          const success = handleSignIn(e, username, password, setIsLoggedIn);
+        onClick={async (e) => {
+          const success = await handleSignIn(e, username, password, setIsLoggedIn);
           if (!success) {
             setLoginError("Please enter a username and password");
           } else {

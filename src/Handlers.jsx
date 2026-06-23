@@ -1,4 +1,4 @@
-export function handleSignIn(e, username, password, setIsLoggedIn) {
+export async function handleSignIn(e, username, password, setIsLoggedIn) {
     e.preventDefault();
 
     if (username.trim() === "" || password.trim() === "") {
@@ -8,14 +8,14 @@ export function handleSignIn(e, username, password, setIsLoggedIn) {
     return true;
 }
 
-export function handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage) {
+export async function handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage) {
     setIsLoggedIn(false);
     setUsername("");
     setPassword("");
     setPage("Courses");
 }
 
-export function handleEnroll(courseName, allCourses, setAllCourses, myCourses, setMyCourses) {
+export async function handleEnroll(courseName, allCourses, setAllCourses, myCourses, setMyCourses) {
     const course = allCourses.find((c) => c.name === courseName);
 
     if (!course) return;
@@ -51,7 +51,7 @@ export function handleEnroll(courseName, allCourses, setAllCourses, myCourses, s
     setMyCourses(newMyCourses);
 }
 
-export function handleDrop(courseName, allCourses, setAllCourses, myCourses, setMyCourses) {
+export async function handleDrop(courseName, allCourses, setAllCourses, myCourses, setMyCourses) {
     if (!myCourses.some((c) => c.name === courseName)) return;
 
     const updatedMyCourses = [];

@@ -16,7 +16,7 @@ def create_app():
   app.register_blueprint(api_bp)
 
   from models import User, Course, Enrollment
-  admin = Admin(app, name='ACME University Admin', template_mode='bootstrap4')
+  admin = Admin(app, name='ACME University Admin')
   admin.add_view(ModelView(User, db.session))
   admin.add_view(ModelView(Course, db.session))
   admin.add_view(ModelView(Enrollment, db.session))

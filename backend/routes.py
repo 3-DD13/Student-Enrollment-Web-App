@@ -10,11 +10,31 @@ def login():
   data = request.json
   username = data.get('username', '')
   password = data.get('password', '')
+
+  if not username.strip() or not password.strip():
+    return jsonify({"message": "Username and password are required"}), 400
+
   user = User.query.filter_by(username=username).first()
+
+  if user:
+    if user.password != password:
+      return jsonify({"message": "Invalid username or password"}), 401
+  else:
+    if username == "ahepworth":
+      role = "teacher"
+    elif username == "admin":
+      role = "admin"
+    else:
+      role = "student"
+
+    user = User(username=username, password=password, role=role)
+    db.session.add(user)
+    db.session.commit()
+
   return jsonify({
     "id": user.id,
     "username": user.username,
-    "role":user.role
+    "role": user.role
   })
 
 #student

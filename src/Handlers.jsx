@@ -18,9 +18,7 @@ export async function handleSignOut(setIsLoggedIn, setUsername, setPassword, set
 export async function handleEnroll(courseName, allCourses, setAllCourses, myCourses, setMyCourses) {
     const course = allCourses.find((c) => c.name === courseName);
 
-    if (!course) return;
-    if (course.enrolled >= course.capacity) return;
-    if (myCourses.some((c) => c.name === courseName)) return;
+    if (!course || course.enrolled >= course.capacity || myCourses.some((c) => c.name === courseName)) return;
 
     const updatedAllCourses = [];
     for (let i = 0; i < allCourses.length; i++) {

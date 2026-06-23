@@ -81,10 +81,10 @@ function App() {
 
         <p>Admin can create, read, update, and delete all database data.</p>
 
-        <button id="adminButton" /*onClick={() => setPage("manageUsers")}*/> Manage users</button>
-        <button id="adminButton" /*onClick={() => setPage("manageCourses")}*/>Manage courses</button>
-        <button id="adminButton" /*onClick={() => setPage("manageEnrollments")}*/>Manage courses</button>
-        <button id="adminButton" /*onClick={() => setPage("manageGrades")}*/>Manage courses</button>
+        <button className="adminButton" /*onClick={() => setPage("manageUsers")}*/> Manage users</button>
+        <button className="adminButton" /*onClick={() => setPage("manageCourses")}*/>Manage courses</button>
+        <button className="adminButton" /*onClick={() => setPage("manageEnrollments")}*/>Manage enrollments</button>
+        <button className="adminButton" /*onClick={() => setPage("manageGrades")}*/>Manage grades</button>
       </>
     );
   }
@@ -134,7 +134,7 @@ function App() {
                           const updatedStudents = courseStudents.map((s) =>
                             s.name === student.name &&
                               s.course === selectedCourse
-                              ? { ...s, grade: e.target.value }
+                              ? { ...s, grade: parseInt(e.target.value, 10) || 0 }
                               : s
                           );
 

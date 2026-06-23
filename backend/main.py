@@ -8,7 +8,7 @@ def create_app():
   app = Flask(__name__)
   CORS(app)
 
-  app.config['SQLALCHEMY_DATABASE_URI'] = 'splite:///school.db'
+  app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///school.db'
 
   db.init_app(app)
 
@@ -28,6 +28,7 @@ class Course(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   course_name = db.Column(db.String(100), nullable=False)
   enrollments = db.relationship('Enrollment', backref='course', lazy=True)
+  teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable = True)
 
 class Enrollment(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -35,3 +36,8 @@ class Enrollment(db.Model):
   course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
   grade = db.Column(db.String(2), nullable=True)
 
+  if __name__ == '__main__':
+    app = create_app()
+    with app.app_context():
+      db.create_all()
+    app.run(debug = True, port = 8000)

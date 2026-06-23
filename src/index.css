@@ -140,6 +140,10 @@ header button:hover {
   background-color: rgba(245, 245, 220, 0.178);
 }
 
+#studentButton:active {
+  background-color: rgba(0, 0, 0, 0.199);
+}
+
 .dropButton {
   background-color: rgba(245, 245, 220, 0.646);
   border: none;
@@ -149,6 +153,10 @@ header button:hover {
 
 .dropButton:hover {
   background-color: rgba(245, 245, 220, 0.9);
+}
+
+.dropButton:active {
+  background-color: rgba(0, 0, 0, 0.199);
 }
 
 button:disabled {
@@ -169,4 +177,39 @@ button:disabled {
 .loginError {
   font-size: 20px;
   margin: 20;
+}
+
+.saveGradesButton {
+  margin-top: 20px;
+  background-color: rgb(7, 60, 255);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.saveGradesButton:hover {
+  background-color: rgba(245, 245, 220, 0.178);
+}
+
+.saveGradesButton:active {
+  background-color: rgba(0, 0, 0, 0.199);
+}
+
+.backButton {
+  margin-top: 20px;
+  background-color: rgb(7, 60, 255);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.backButton:hover {
+  background-color: rgba(245, 245, 220, 0.178);
+}
+
+.backButton:active {
+  background-color: rgba(0, 0, 0, 0.199);
 }

@@ -107,7 +107,7 @@ function App() {
           <div className='interfaceBody'>
           <h1>{selectedCourse}</h1>
 
-          <button onClick={() => setSelectedCourse(null)}>
+          <button className = 'backButton' onClick={() => setSelectedCourse(null)}>
             Back
           </button>
 
@@ -147,6 +147,7 @@ function App() {
             </tbody>
           </table>
           <button
+            className="saveGradesButton"
             onClick={() => alert("Grades saved successfully")}>
             Save Grades
           </button>

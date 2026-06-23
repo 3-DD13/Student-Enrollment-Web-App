@@ -220,8 +220,8 @@ function App() {
         </header>
 
         <div className='tabs'>
-        <button id="studentButton" onClick={() => setPage("Courses")}> My Courses</button>
-        <button id="studentButton" onClick={() => setPage("addCourses")}> Add Courses</button>
+        <button id="studentButton" className= {page === "Courses" ? "activeTab": ""} onClick={() => setPage("Courses")}> My Courses</button>
+        <button id="studentButton" className= {page === "addCourses" ? "activeTab": ""} onClick={() => setPage("addCourses")}> Add Courses</button>
         </div>
 
         <div className='interfaceBody'>

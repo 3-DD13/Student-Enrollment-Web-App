@@ -5,6 +5,7 @@ class User(db.Model):
   username = db.Column(db.String(80), unique=True, nullable=False)
   role = db.Column(db.String(20), default='student')
   enrollments = db.relationship('Enrollment', backref='user', lazy=True)
+  password = db.Column(db.String(255), nullable = False, default = '123')
 
 class Course(db.Model):
   id = db.Column(db.Integer, primary_key=True)

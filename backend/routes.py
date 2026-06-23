@@ -4,6 +4,19 @@ from database import db
 
 api_bp = Blueprint('api', __name__)
 
+#login
+@api_bp.route('/login', methods = ['POST'])
+def login():
+  data = request.json
+  username = data.get('username', '')
+  password = data.get('password', '')
+  user = User.query.filter_by(username=username).first()
+  return jsonify({
+    "id": user.id,
+    "username": user.username,
+    "role":user.role
+  })
+
 #student
 @api_bp.route('/courses/all', methods = ['GET'])
 def getAllCourses():
@@ -69,7 +82,7 @@ def gradeUpdate(enrollment_id):
 @api_bp.route('/admin/add-user', methods = ['POST'])
 def addUser():
   data = request.json
-  newUser = User(username=data['username'], role=data.get('role', 'student'))
+  newUser = User(username=data['username'], role=data.get('role', 'student'), password=data.get('password', '123'))
   db.session.add(newUser)
   db.session.commit()
   return jsonify({"message": "User added"})
@@ -91,6 +104,8 @@ def updateUser(user_id):
     return jsonify({"message": "User not found"}), 404
   if 'username' in data:
     user.username = data['username']
+  if 'password' in data:
+    user.password = data['password']
   if 'role' in data:
     user.role = data['role']
   db.session.commit()

@@ -1,11 +1,33 @@
-export async function handleSignIn(e, username, password, setIsLoggedIn) {
+export async function handleSignIn(e, username, password, setIsLoggedIn, setRole) {
     e.preventDefault();
 
     if (username.trim() === "" || password.trim() === "") {
         return false;
     }
-    setIsLoggedIn(true);
-    return true;
+    
+    try {
+        const response = await fetch('http://127.0.0.1:8000/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({username, password})
+        });
+        if (!response.ok) {
+            return false;
+        }
+
+        const data = await response.json();
+        if (data.role == "admin") {
+            window.location.href = "http://127.0.0.1:8000/admin";
+            return true;
+        }
+        setRole(data.role);
+        setIsLoggedIn(true);
+        return true;
+    }
+    catch (err) {
+        console.error("Login request failed:", err)
+        return false;
+    }
 }
 
 export async function handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage) {

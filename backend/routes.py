@@ -112,7 +112,7 @@ def getAllCourseAdmin():
     'teacher_id': c.teacher_id
   } for c in courses])
 
-@api_bp.route('/admin/admin-course', methods = ['POST'])
+@api_bp.route('/admin/add-course', methods = ['POST'])
 def addCourse():
   data = request.json
   newCourse = Course(course_name=data['course_name'], teacher_id=data.get('teacher_id'))
@@ -161,7 +161,7 @@ def addEnrollment():
   db.session.commit()
   return jsonify({"message": "Enrollment added"})
 
-@api_bp.route('/admin/update-enrollement/<int:enrollment_id>', methods = ['POST'])
+@api_bp.route('/admin/update-enrollment/<int:enrollment_id>', methods = ['POST'])
 def updateEnrollment(enrollment_id):
   data = request.json
   enrollment = Enrollment.query.get(enrollment_id)

@@ -15,39 +15,55 @@ export async function handleSignOut(setIsLoggedIn, setUsername, setPassword, set
     setPage("Courses");
 }
 
-export async function handleEnroll(courseName, allCourses, setAllCourses, myCourses, setMyCourses) {
-    const course = allCourses.find((c) => c.name === courseName);
-
-    if (!course || course.enrolled >= course.capacity || myCourses.some((c) => c.name === courseName)) return;
-
-    const updatedAllCourses = [];
-    for (let i = 0; i < allCourses.length; i++) {
-        const c = allCourses[i];
-        if (c.name === courseName) {
-            updatedAllCourses.push({
-                name: c.name,
-                teacher: c.teacher,
-                time: c.time,
-                enrolled: c.enrolled + 1,
-                capacity: c.capacity
-            });
-        }
-        else {
-            updatedAllCourses.push(c);
-        }
-    }
-    setAllCourses(updatedAllCourses);
-
-    const newMyCourses = myCourses.slice();
-    newMyCourses.push({
-        name: course.name,
-        teacher: course.teacher,
-        time: course.time,
-        enrolled: course.enrolled + 1,
-        capacity: course.capacity
+export async function handleEnroll(courseId, setAllCourses, setMyCourses) {
+    const response = await fetch(`https://127.0.0.1:5000/student/enroll/${courseId}`, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ user_id: 1})
     });
-    setMyCourses(newMyCourses);
+
+    if(response.ok) {
+        const updateAll = await fetch(`https://127.0.0.1:5000/courses/all`).then(r => r.json());
+        setAllCourses(updateAll);
+
+        const updatedMy = await fetch(`https://127.0.0.1:5000/student/my-classes/1`)
+        setMyCourses(updatedMy)
+    }
 }
+
+// export async function handleEnroll(courseName, allCourses, setAllCourses, myCourses, setMyCourses) {
+//     const course = allCourses.find((c) => c.name === courseName);
+
+//     if (!course || course.enrolled >= course.capacity || myCourses.some((c) => c.name === courseName)) return;
+
+//     const updatedAllCourses = [];
+//     for (let i = 0; i < allCourses.length; i++) {
+//         const c = allCourses[i];
+//         if (c.name === courseName) {
+//             updatedAllCourses.push({
+//                 name: c.name,
+//                 teacher: c.teacher,
+//                 time: c.time,
+//                 enrolled: c.enrolled + 1,
+//                 capacity: c.capacity
+//             });
+//         }
+//         else {
+//             updatedAllCourses.push(c);
+//         }
+//     }
+//     setAllCourses(updatedAllCourses);
+
+//     const newMyCourses = myCourses.slice();
+//     newMyCourses.push({
+//         name: course.name,
+//         teacher: course.teacher,
+//         time: course.time,
+//         enrolled: course.enrolled + 1,
+//         capacity: course.capacity
+//     });
+//     setMyCourses(newMyCourses);
+// }
 
 export async function handleDrop(courseName, allCourses, setAllCourses, myCourses, setMyCourses) {
     if (!myCourses.some((c) => c.name === courseName)) return;

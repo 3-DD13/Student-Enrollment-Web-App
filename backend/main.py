@@ -4,8 +4,14 @@ from database import db
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 
+class CourseView(ModelView):
+  form_columns = ('course_name', 'teacher', 'enrollments')
+
 def create_app():
   app = Flask(__name__)
+
+  app.config['SECRET_KEY'] = 'password'
+
   CORS(app)
 
   app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///school.db'

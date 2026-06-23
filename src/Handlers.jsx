@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 export async function handleSignIn(e, username, password, setIsLoggedIn, setRole) {
     e.preventDefault();
 
@@ -29,17 +28,6 @@ export async function handleSignIn(e, username, password, setIsLoggedIn, setRole
         console.error("Login request failed:", err)
         return false;
     }
-=======
-export async function handleSignIn(e, username, password, setIsLoggedIn) {
-  e.preventDefault();
-
-  if (username.trim() === "" || password.trim() === "") {
-    return false;
-  }
-
-  setIsLoggedIn(true);
-  return true;
->>>>>>> 3a27144b6db27e19ca8ed71805ee518caf05d87e
 }
 
 export async function handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage) {

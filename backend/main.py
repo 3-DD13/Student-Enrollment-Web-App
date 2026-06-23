@@ -36,8 +36,8 @@ class Enrollment(db.Model):
   course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=False)
   grade = db.Column(db.String(2), nullable=True)
 
-  if __name__ == '__main__':
-    app = create_app()
-    with app.app_context():
-      db.create_all()
-    app.run(debug = True, port = 8000)
+if __name__ == '__main__':
+  app = create_app()
+  with app.app_context():
+    db.create_all()
+  app.run(debug = True, port = 8000)

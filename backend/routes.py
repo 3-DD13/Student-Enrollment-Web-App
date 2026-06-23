@@ -9,7 +9,7 @@ def getAllCourses():
   courses = Course.query.all()
   return jsonify([{
     'id': c.id,
-    'name': c.courseName
+    'name': c.course_name
     } for c in courses])
 
 @api_bp.route('/student/my-classes/<int:user_id>', methods = ['GET'])
@@ -82,7 +82,7 @@ def getAllUsers():
     'role': u.role
   } for u in users])
 
-@api_bp.route('/admin/update-user/<int:user_id', methods = ['POST'])
+@api_bp.route('/admin/update-user/<int:user_id>', methods = ['POST'])
 def updateUser(user_id):
   data = request.json
   user = User.query.get(user_id)
@@ -95,8 +95,8 @@ def updateUser(user_id):
   db.session.commit()
   return jsonify({"message": "User updated"})
 
-@api_bp.route('/admin/delete-user/<int:user_id', methods = ['POST'])
-def deleteUSer(user_id):
+@api_bp.route('/admin/delete-user/<int:user_id>', methods = ['POST'])
+def deleteUser(user_id):
   user = User.query.get(user_id)
   db.session.delete(user)
   db.session.commit()
@@ -122,7 +122,7 @@ def addCourse():
 
 @api_bp.route('/admin/update-course/<int:course_id>', methods = ['POST'])
 def updateCourse(course_id):
-  data = request.jason
+  data = request.json
   course = Course.query.get(course_id)
   if 'course_name' in data:
     course.course_name = data['course_name']
@@ -149,7 +149,7 @@ def getAllEnrollments():
     'grade': e.grade
   } for e in enrollments])
 
-@api_bp.route('/admin/add-enrollment', methods = ['GET'])
+@api_bp.route('/admin/add-enrollment', methods = ['POST'])
 def addEnrollment():
   data = request.json
   newEnrollment = Enrollment(
@@ -172,7 +172,7 @@ def updateEnrollment(enrollment_id):
   db.session.commit()
   return jsonify({"message": "Enrollment updated"})
 
-@api_bp.route('/admin/delete-enrollment/<int:enrollment_id>', mehtods = ['POST'])
+@api_bp.route('/admin/delete-enrollment/<int:enrollment_id>', methods = ['POST'])
 def deleteEnrollment(enrollment_id):
   enrollment = Enrollment.query.get(enrollment_id)
   db.session.delete(enrollment)

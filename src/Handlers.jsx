@@ -16,17 +16,17 @@ export async function handleSignOut(setIsLoggedIn, setUsername, setPassword, set
 }
 
 export async function handleEnroll(courseId, setAllCourses, setMyCourses) {
-    const response = await fetch(`https://127.0.0.1:5000/student/enroll/${courseId}`, {
+    const response = await fetch(`http://127.0.0.1:8000/student/enroll/${courseId}`, {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ user_id: 1})
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id: 1 })
     });
 
-    if(response.ok) {
-        const updateAll = await fetch(`https://127.0.0.1:5000/courses/all`).then(r => r.json());
+    if (response.ok) {
+        const updateAll = await fetch(`http://127.0.0.1:8000/courses/all`).then(r => r.json());
         setAllCourses(updateAll);
 
-        const updatedMy = await fetch(`https://127.0.0.1:5000/student/my-classes/1`)
+        const updatedMy = await fetch(`http://127.0.0.1:8000/student/my-classes/1`)
         setMyCourses(updatedMy)
     }
 }

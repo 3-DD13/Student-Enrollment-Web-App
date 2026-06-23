@@ -65,7 +65,7 @@ function App() {
   }
 
   const fetchCourses = async () => {
-    const response = await fetch('http://127.0.0.1:5000/courses/all');
+    const response = await fetch('http://127.0.0.1:8000/courses/all');
     const data = await response.json()
     console.log(data);
   }
@@ -103,59 +103,59 @@ function App() {
       return (
         <>
           <header>
-          {/* change later */}
-          <h3>Welcome Dr Hepworth</h3>
-          <h1>ACME University</h1>
-          <button onClick={async () => await handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
-        </header>
+            {/* change later */}
+            <h3>Welcome Dr Hepworth</h3>
+            <h1>ACME University</h1>
+            <button onClick={async () => await handleSignOut(setIsLoggedIn, setUsername, setPassword, setPage)}> Sign out</button>
+          </header>
 
           <div className='interfaceBody'>
-          <h1>{selectedCourse}</h1>
+            <h1>{selectedCourse}</h1>
 
-          <button className = 'backButton' onClick={() => setSelectedCourse(null)}>
-            Back
-          </button>
+            <button className='backButton' onClick={() => setSelectedCourse(null)}>
+              Back
+            </button>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Student Name</th>
-                <th>Grade</th>
-              </tr>
-            </thead>
+            <table>
+              <thead>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
 
-            <tbody>
-              {courseStudents
-                .filter((student) => student.course === selectedCourse)
-                .map((student) => (
-                  <tr key={student.name}>
-                    <td>{student.name}</td>
+              <tbody>
+                {courseStudents
+                  .filter((student) => student.course === selectedCourse)
+                  .map((student) => (
+                    <tr key={student.name}>
+                      <td>{student.name}</td>
 
-                    <td>
-                      <input
-                        type="number"
-                        value={student.grade}
-                        onChange={(e) => {
-                          const updatedStudents = courseStudents.map((s) =>
-                            s.name === student.name &&
-                              s.course === selectedCourse
-                              ? { ...s, grade: parseInt(e.target.value, 10) || 0 }
-                              : s
-                          );
+                      <td>
+                        <input
+                          type="number"
+                          value={student.grade}
+                          onChange={(e) => {
+                            const updatedStudents = courseStudents.map((s) =>
+                              s.name === student.name &&
+                                s.course === selectedCourse
+                                ? { ...s, grade: parseInt(e.target.value, 10) || 0 }
+                                : s
+                            );
 
-                          setCourseStudents(updatedStudents);
-                        }}
-                      />
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-          <button
-            className="saveGradesButton"
-            onClick={() => alert("Grades saved successfully")}>
-            Save Grades
-          </button>
+                            setCourseStudents(updatedStudents);
+                          }}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+            <button
+              className="saveGradesButton"
+              onClick={() => alert("Grades saved successfully")}>
+              Save Grades
+            </button>
           </div>
         </>
       );
@@ -173,34 +173,34 @@ function App() {
         </header>
 
         <div className='interfaceBody'>
-        <h2>Your Courses</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Course Name</th>
-              <th>Teacher</th>
-              <th>Time</th>
-              <th>Students Enrolled</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {allCourses.filter((course) => course.teacher === "Ammon Hepworth").map((course) => (
-              <tr key={course.name}>
-                <td>{course.name}</td>
-                <td>{course.teacher}</td>
-                <td>{course.time}</td>
-                <td>{course.enrolled}/{course.capacity}</td>
-
-                <td>
-                  <button onClick={() => setSelectedCourse(course.name)}>
-                    view</button>
-                </td>
-
+          <h2>Your Courses</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Teacher</th>
+                <th>Time</th>
+                <th>Students Enrolled</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {allCourses.filter((course) => course.teacher === "Ammon Hepworth").map((course) => (
+                <tr key={course.name}>
+                  <td>{course.name}</td>
+                  <td>{course.teacher}</td>
+                  <td>{course.time}</td>
+                  <td>{course.enrolled}/{course.capacity}</td>
+
+                  <td>
+                    <button onClick={() => setSelectedCourse(course.name)}>
+                      view</button>
+                  </td>
+
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </>
     );
@@ -226,47 +226,47 @@ function App() {
         </header>
 
         <div className='tabs'>
-        <button id="studentButton" className= {page === "Courses" ? "activeTab": ""} onClick={() => setPage("Courses")}> My Courses</button>
-        <button id="studentButton" className= {page === "addCourses" ? "activeTab": ""} onClick={() => setPage("addCourses")}> Add Courses</button>
+          <button id="studentButton" className={page === "Courses" ? "activeTab" : ""} onClick={() => setPage("Courses")}> My Courses</button>
+          <button id="studentButton" className={page === "addCourses" ? "activeTab" : ""} onClick={() => setPage("addCourses")}> Add Courses</button>
         </div>
 
         <div className='interfaceBody'>
-        <h2>{page === "Courses" ? "Your Courses" : "All Courses"}</h2>
+          <h2>{page === "Courses" ? "Your Courses" : "All Courses"}</h2>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Course name</th>
-              <th>Teacher</th>
-              <th>Time</th>
-              <th>Student enrolled</th>
-              {page === "addCourses" && <th>Action</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {(page === "Courses" ? myCourses : allCourses).map((course) => {
-              const enrolled = myCourses.some((c) => c.name === course.name);
-              const full = course.enrolled >= course.capacity;
-              return (
-                <tr key={course.name}>
-                  <td>{course.name}</td>
-                  <td>{course.teacher}</td>
-                  <td>{course.time}</td>
-                  <td>{course.enrolled}/{course.capacity}</td>
-                  {page === "addCourses" && (
-                    <td>
-                      {enrolled ? (
-                        <button onClick={async () => await handleDrop(course.name, allCourses, setAllCourses, myCourses, setMyCourses)}>Drop</button>
-                      ) : (
-                        <button onClick={async () => await handleEnroll(course.name, allCourses, setAllCourses, myCourses, setMyCourses)} disabled={full} > {full ? "Full" : "Enroll"}</button>
-                      )}
-                    </td>
-                  )}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+          <table>
+            <thead>
+              <tr>
+                <th>Course name</th>
+                <th>Teacher</th>
+                <th>Time</th>
+                <th>Student enrolled</th>
+                {page === "addCourses" && <th>Action</th>}
+              </tr>
+            </thead>
+            <tbody>
+              {(page === "Courses" ? myCourses : allCourses).map((course) => {
+                const enrolled = myCourses.some((c) => c.name === course.name);
+                const full = course.enrolled >= course.capacity;
+                return (
+                  <tr key={course.name}>
+                    <td>{course.name}</td>
+                    <td>{course.teacher}</td>
+                    <td>{course.time}</td>
+                    <td>{course.enrolled}/{course.capacity}</td>
+                    {page === "addCourses" && (
+                      <td>
+                        {enrolled ? (
+                          <button onClick={async () => await handleDrop(course.name, allCourses, setAllCourses, myCourses, setMyCourses)}>Drop</button>
+                        ) : (
+                          <button onClick={async () => await handleEnroll(course.name, allCourses, setAllCourses, myCourses, setMyCourses)} disabled={full} > {full ? "Full" : "Enroll"}</button>
+                        )}
+                      </td>
+                    )}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </>
     );

@@ -10,7 +10,7 @@ h1 {
   margin-bottom: 32px;
 }
 
-.tabs{
+.tabs {
   display: flex;
   margin-top: 10px;
   max-width: 900px;
@@ -51,7 +51,7 @@ h2 {
 
 .signIn {
   background-color: rgb(7, 60, 255);
-  border-radius:  20px;
+  border-radius: 20px;
   padding: 10px 20px;
   border: 0px;
   color: white;

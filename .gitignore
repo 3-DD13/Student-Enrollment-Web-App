@@ -5,6 +5,8 @@ backend/__pycache__/
 backend/*.pyc/
 backend/.env
 
+instance/
+
 # Logs
 logs
 *.log

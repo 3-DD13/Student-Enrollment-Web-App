@@ -1,5 +1,6 @@
 from flask import request, jsonify, Blueprint 
-from main import db, User, Course, Enrollment
+from models import User, Course, Enrollment
+from database import db
 
 api_bp = Blueprint('api', __name__)
 
